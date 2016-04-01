@@ -30,6 +30,10 @@
 
 
    Updated by Aaron Ciuffo 
+   
+   Changes:
+    removed depricated assign() statements
+
 */
 // build a cube with chamfered edges
 module chamfered_cube(size,d=1){
