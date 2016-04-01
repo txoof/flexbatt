@@ -300,7 +300,7 @@ module flexbatter(
   L = m*l+lcorr;// corrected overall lenth
   lc = L/m;     // corrected cell length
 
-   for(i=[0:n-1])translate([50,i*(d+2*w-ws),0])rotate([0, 0, 180*i]){ // generate n battery cases
+   for(i=[0:n-1])translate([0,i*(d+2*w-ws),0]){ // generate n battery cases
       jmin = deepen > 0 ? 0 : -1;
       difference(){
          
