@@ -205,7 +205,8 @@ module battery(type = AA, n = 1, m = 1) {
   );
 }
 
-//battery(type = AA, n = 3, m = 1);
+battery(type = AA, n = 3, m = 1);
+//flexbatter1xAAx3();
 
 // build a cube with chamfered edges
 module chamfered_cube(size,d=1){
@@ -299,7 +300,7 @@ module flexbatter(
   L = m*l+lcorr;// corrected overall lenth
   lc = L/m;     // corrected cell length
 
-   for(i=[0:n-1])translate([0,i*(d+2*w-ws),0]){ // generate n battery cases
+   for(i=[0:n-1])translate([50,i*(d+2*w-ws),0])rotate([0, 0, 180*i]){ // generate n battery cases
       jmin = deepen > 0 ? 0 : -1;
       difference(){
          
@@ -663,4 +664,3 @@ module flexbatter2xCx2(){ // AUTO_MAKE_STL
 //translate([0,80,0])flexbatter2xAAx2();
 //flexbatter2xAA();
 
-flexbatter1xAAx3();
