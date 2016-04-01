@@ -133,8 +133,8 @@ AA = [
   ["overHang", 0],        // oh:      overhang to avoid lifting of cell
   ["springExtra", 0.5],   // el:      extra spring length
   ["lenCorrect", 1.6],    // lcorr:   length correction for multi-cell compartments 
-  ["cutDepth", 0],        // deepen:  relative deepning for side grip
-  ["df", 1]               // df:      relative deepening radius
+  ["cutDepth", 0.7],        // deepen:  relative deepning for side grip
+  ["df", 0.3]               // df:      relative deepening radius
 ];
 
 
@@ -205,7 +205,7 @@ module battery(type = AA, n = 1, m = 1) {
   );
 }
 
-battery(type = AA, n = 5, m = 1);
+//battery(type = AA, n = 3, m = 1);
 
 // build a cube with chamfered edges
 module chamfered_cube(size,d=1){
@@ -662,3 +662,5 @@ module flexbatter2xCx2(){ // AUTO_MAKE_STL
 //translate([0,40,0])flexbatter2xAA();
 //translate([0,80,0])flexbatter2xAAx2();
 //flexbatter2xAA();
+
+flexbatter1xAAx3();
