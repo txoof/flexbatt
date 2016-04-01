@@ -30,11 +30,87 @@
 
 
    Updated by Aaron Ciuffo 
-   
+    1 April 2015 
    Changes:
     removed depricated assign() statements
 
 */
+
+// Defined battery types
+/*
+module flexbatter18650(n=1,m=1,deepen=0,df=1,oh=0){
+   flexbatter(n=n,m=m,deepen=deepen,df=df,oh=oh,l=65.2,lcorr=0.3,d=18.4,hf=0.75,shd=3,eps=0.28);
+}  
+*/
+
+/*
+module flexbatter18650P(n=1,m=1){
+   flexbatter(n=n,m=m,l=70,lcorr=0,d=18.4,hf=0.75,shd=3,eps=0.28);
+}  
+
+module flexbatterCR123A(n=1,m=1){
+   flexbatter(n=n,m=m,l=35.1,lcorr=0,d=16.7,hf=0.75,shd=3,xchan=[0.5],eps=0.28);
+}  
+
+module flexbatterD(n=1,m=1){
+   flexbatter(n=n,m=m,l=61.5,lcorr=0,d=34.0,hf=0.75,shd=3,eps=0.28);
+}  
+
+module flexbatterC(n=1,m=1,deepen=0,df=1,oh=0){
+   flexbatter(n=n,m=m,deepen=deepen,df=df,oh=oh,l=49.6,lcorr=2,d=26.4,hf=0.75,shd=3,eps=0.28);
+}  
+
+module flexbatterAA(n=1,m=1,Xdeepen=0,Xdf=1,Xoh=0){
+   flexbatter(n=n,m=m,Xdeepen=deepen,Xdf=df,oh=oh,Xl=50.0,Xlcorr=1.6,Xd=14.4,Xhf=0.80,Xshd=2.5,Xel=0.5,eps=0.28);
+}  
+*/
+AA = [
+  ["len", 50],            // l:       length of cell
+  ["dia", 14.4],          // d:       diameter of cell
+  ["cellHeight", 0.80],   // hf:      relative height of cell (1 = full diameter)
+  ["screwHole", 2.5],     // shd:     screw hole diamter
+  ["eps", 0.28],          // eps:     extra diameter space
+  ["overHang", 0],        // oh:      overhang to avoid lifting of cell
+  ["springExtra", 0.5],   // el:      extra spring length
+  ["xChan", -1],          // xchan:   relative position of traversal wire channels
+  ["lenCorrect", 1.6],    // lcorr:   length correction for multi-cell compartments 
+  ["cutDepth", 0],        // deepen:  relative deepning for side grip
+  ["df", 1]              // df:      relative deepening radius
+];
+
+/*
+  n=1,             // number of compartments side by side
+  m=1,             // number of cells in one compartment
+  l=65,            // length of cell
+  d=18,            // diameter of cell
+  hf=0.75,         // relative hight of cell (1=full diameter)
+  shd=3,           // screw hole diameter
+  eps=0.28,        // extra diameter space 
+  oh=0,            // overhang to avoid lifting of cell
+  el=0,            // extra spring length (needed for small cells)
+  xchan=[1/4,3/4], // relative position of traversal wire channels
+  deepen=0,        // relative deepening for side grip of batteries 
+  df=1,            // relative deepening radius
+  lcorr=0,         // length correction for multicell compartments
+  $fn=24
+
+*/
+
+
+/*
+module flexbatterAAA(n=1,m=1,deepen=0,df=1,oh=0){
+   flexbatter(n=n,m=m,deepen=deepen,df=df,oh=oh,l=44.5,lcorr=1.6,d=10.5,hf=0.84,shd=2,el=1,xchan=[0.5],eps=0.2);
+}  
+
+module flexbatter26650(n=1,m=1){
+   flexbatter(n=n,m=m,l=65.7,lcorr=0,d=26.4,hf=0.72,shd=3,eps=0.28);
+}  
+*/
+
+
+
+
+
 // build a cube with chamfered edges
 module chamfered_cube(size,d=1){
    hull(){
@@ -489,4 +565,4 @@ module flexbatter2xCx2(){ // AUTO_MAKE_STL
 //translate([-25,0,0])flexbatter3xAA();
 //translate([0,40,0])flexbatter2xAA();
 //translate([0,80,0])flexbatter2xAAx2();
-flexbatter2xAA();
+//flexbatter2xAA();
