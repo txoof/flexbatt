@@ -30,13 +30,23 @@
 
 
    Updated by Aaron Ciuffo 
-    1 April 2015 
+    1 April 2016
    Changes:
-    removed depricated assign() statements
+     * removed depricated assign() statements
+     * switched to block quotes
+     * added meta-module battery() to make library calls easier
+     * implemented battery definition and lookup to make library calls easier
+     * added customizer section
+     * fixed missing cutouts inside parallel cells on Y face as per Heinz suggestion
+
+    Usage:
+      * battery(type = <battery name>, n = <num parallel cells>, m = <num series cells>);
+
 
 */
 
 /* [Battery Type and Configuration] */
+// variables for customizer
 Battery = 1; //[0:"AAA", 1:"AA", 2:"C", 3:"D", 4:"Li18650", 5:"Li18650P", 6:"CR123A", 7:"Li26650"];
 
 ParallelCells = 3; //[1:10]
@@ -438,6 +448,8 @@ module flexbatter(
    }
 
 }
+
+// everything below this point is depricated in favor of the battery() module
 
 /*
 module flexbatter18650(n=1,m=1,deepen=0,df=1,oh=0){
