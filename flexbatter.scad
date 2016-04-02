@@ -46,9 +46,7 @@
 */
 
 /* [Battery Type and Configuration] */
-// variables for customizer
-Battery = 1; //[0:"AAA", 1:"AA", 2:"C", 3:"D", 4:"Li18650", 5:"Li18650P", 6:"CR123A", 7:"Li26650"];
-
+cell = 1; //[0:AAA, 1:AA, 2:C, 3:D, 4:Li18650, 5:Li18650P, 6:CR123A, 7:Li26650]
 ParallelCells = 3; //[1:10]
 SeriesCells = 1; //[1:3]
 
@@ -120,6 +118,9 @@ D = [
   ["screwHole", 3],         // shd:     screw hole diamter
   ["eps", 0.28],            // eps:     extra diameter space
   ["lenCorrect", 0],        // lcorr:   length correction for multi-cell compartments 
+  ["df", .01],
+  ["cutDepth", 0.8],
+  ["overHang", ew]
 ];
 
 
@@ -232,7 +233,7 @@ module battery(type = AA, n = 1, m = 1) {
 }
 
 module customizer() {
-  battery(type = batteryTypes[Battery], n = ParallelCells, m = SeriesCells);
+  battery(type = batteryTypes[cell], n = ParallelCells, m = SeriesCells);
 }
 
 customizer();
