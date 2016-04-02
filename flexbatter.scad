@@ -36,6 +36,16 @@
 
 */
 
+/* [Battery Type and Configuration] */
+Battery = 1; //[0:"AAA", 1:"AA", 2:"C", 3:"D", 4:"Li18650", 5:"Li18650P", 6:"CR123A", 7:"Li26650"];
+
+ParallelCells = 3; //[1:10]
+SeriesCells = 1; //[1:3]
+
+//types = [AAA, AA, C, D, Li18650, Li18650P, CR123A, Li26650];
+
+/* [Hidden] */
+
 // Defined battery types
 /*
 module flexbatter18650(n=1,m=1,deepen=0,df=1,oh=0){
@@ -171,6 +181,9 @@ Li26650 = [
   ["lenCorrect", 0],    // lcorr:   length correction for multi-cell compartments 
 ];
 
+// array for customizer
+batteryTypes = [AAA, AA, C, D, Li18650, Li18650P, CR123A, Li26650];
+
 
 module battery(type = AA, n = 1, m = 1) {
   // the search(["foo"], array, num_returns_per_match = 1) returns an array containing
@@ -205,7 +218,13 @@ module battery(type = AA, n = 1, m = 1) {
   );
 }
 
-battery(type = AA, n = 3, m = 1);
+module customizer() {
+  battery(type = batteryTypes[Battery], n = ParallelCells, m = SeriesCells);
+}
+
+customizer();
+
+//battery(type = AA, n = 2, m = 1);
 //flexbatter1xAAx3();
 
 // build a cube with chamfered edges
