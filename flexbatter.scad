@@ -319,6 +319,7 @@ module flexbatter(
                translate([-1,-d/2,-1])cube([2,d,d+wz+2]);
 	       // small cylindrical carving of walls and bottom
 	       translate([-1,0,d/2+wz])rotate([0,90,0])cylinder(r=d/2+eps,h=L+1);
+               if(i<n-1)translate([-1,d+2*w-ws,d/2+wz])rotate([0,90,0])cylinder(r=d/2+eps,h=L+1);
             }
       
             // plastic spring for minus pole
