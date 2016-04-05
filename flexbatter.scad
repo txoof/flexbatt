@@ -39,6 +39,10 @@
      * added customizer section
      * fixed missing cutouts inside parallel cells on Y face as per Heinz suggestion
 
+    5 April 2016
+      * updated engraving to alternate +/-; -/+; +/- in cells
+        - thanks to [infinigrove](http://www.thingiverse.com/infinigrove)
+
     Usage:
       * battery(type = <battery name>, n = <num parallel cells>, m = <num series cells>);
 
@@ -49,9 +53,11 @@
 cell = 1; //[0:AAA, 1:AA, 2:C, 3:D, 4:Li18650, 5:Li18650P, 6:CR123A, 7:Li26650]
 ParallelCells = 3; //[1:10]
 SeriesCells = 1; //[1:3]
+AlternateSymbols = 1; //[0:False, 1:True]
 
 
 /* [Hidden] */
+// preview[view:south east, tilt:top diagonal]
 // not sure what these do, but they are refferenced by several battery vars
 ew=0.56;   // extrusion width
 eh=0.25;   // extrusion height
@@ -233,6 +239,7 @@ module battery(type = AA, n = 1, m = 1) {
 }
 
 module customizer() {
+  color("gold")
   battery(type = batteryTypes[cell], n = ParallelCells, m = SeriesCells);
 }
 
@@ -409,6 +416,38 @@ module flexbatter(
          }
 
          // engrave battery symbol
+    // engrave battery symbol
+      #for(j=[0:m-1])translate([j*lc,0,0]){
+          sy=(l>12*shd)?1:-1; // for short batteries +- on the side
+          translate([w+l/2,d/4+1,wz])cube([l/5,d/4.5,4*eh],true);
+
+           //if (i==1) {
+          if ((i % 2 == 0) && (AlternateSymbols == 1)) {
+          translate([w+l/2+l/10,d/4+1,wz])cube([d/7,d/10,4*eh],true);
+           // engrave plus symbol
+             translate([w+l/2+l/(sy>0?5:10),sy*(d/4+1),wz]){
+                cube([1,d/4,4*eh],true);
+                cube([d/4,1,4*eh],true);
+                 }
+          // engrave minus symbol
+             translate([w+l/2-l/(sy>0?5:10),sy*(d/4+1),wz])
+                cube([1,d/4,4*eh],true);
+             }
+             else {
+                 translate([w+l/2-l/10,d/4+1,wz])cube([d/7,d/10,4*eh],true);
+           // engrave plus symbol
+             translate([w+l/2-l/(sy>0?5:10),sy*(d/4+1),wz]){
+                cube([1,d/4,4*eh],true);
+                cube([d/4,1,4*eh],true);
+                 }
+          // engrave minus symbol
+             translate([w+l/2+l/(sy>0?5:10),sy*(d/4+1),wz])
+                cube([1,d/4,4*eh],true);
+             }
+
+      }
+
+         /*
 	 for(j=[0:m-1])translate([j*lc,0,0]){
 	    translate([w+l/2,d/4+1,wz])cube([l/5,d/4.5,4*eh],true);
 	    translate([w+l/2+l/10,d/4+1,wz])cube([d/7,d/10,4*eh],true);
@@ -424,7 +463,7 @@ module flexbatter(
 	          cube([1,d/4,4*eh],true);
             
 	 }
-   
+         */
          //correction for middle separators
          //if(i<n-1) translate([-d,d/2+w-ws/2,-1])cube([d,ws/2+0.1,d+2]);
 	 //else translate([1,d/2+w,-0.01])cylinder(r1=ch,r2=0,h=ch);
