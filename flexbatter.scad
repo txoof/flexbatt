@@ -57,7 +57,7 @@ AlternateSymbols = 1; //[0:False, 1:True]
 
 
 /* [Hidden] */
-// preview[view:south east, tilt:top diagonal]
+// preview[view:south, tilt:top]
 // not sure what these do, but they are refferenced by several battery vars
 ew=0.56;   // extrusion width
 eh=0.25;   // extrusion height
@@ -205,7 +205,7 @@ Li26650 = [
 batteryTypes = [AAA, AA, C, D, Li18650, Li18650P, CR123A, Li26650];
 
 
-module battery(type = AA, n = 1, m = 1) {
+module battery(type = AA, n = 1, m = 1, alt = 1) {
   // the search(["foo"], array, num_returns_per_match = 1) returns an array containing
   // the index of the element in array that contains "foo". Element 0 is the match
   l = type[search(["len"], type, num_returns_per_match = 1)[0]][1];
@@ -234,18 +234,19 @@ module battery(type = AA, n = 1, m = 1) {
     deepen = deepen==undef ? 0 : deepen,    // relative deepening for side grip of batteries 
     df = df==undef ? 1 : df,                // relative deepening radius
     lcorr = lcorr==undef ? 0 : lcorr,       // length correction for multicell compartments
+    alt = alt,                              // alternate the battery symbols
     $fn = 24
   );
 }
 
 module customizer() {
   color("gold")
-  battery(type = batteryTypes[cell], n = ParallelCells, m = SeriesCells);
+  battery(type = batteryTypes[cell], n = ParallelCells, m = SeriesCells, alt = AlternateSymbols);
 }
 
 customizer();
 
-//battery(type = AA, n = 2, m = 1);
+//battery(type = AA, n = 5, m = 1, alt = true);
 //flexbatter1xAAx3();
 
 // build a cube with chamfered edges
@@ -332,6 +333,7 @@ module flexbatter(
   deepen=0,        // relative deepening for side grip of batteries 
   df=1,            // relative deepening radius
   lcorr=0,         // length correction for multicell compartments
+  alt = true,      // alternate the symbols
   $fn=24
   ){
 
@@ -422,7 +424,7 @@ module flexbatter(
           translate([w+l/2,d/4+1,wz])cube([l/5,d/4.5,4*eh],true);
 
            //if (i==1) {
-          if ((i % 2 == 0) && (AlternateSymbols == 1)) {
+          if ((i % 2 == 0) && (alt)) {
           translate([w+l/2+l/10,d/4+1,wz])cube([d/7,d/10,4*eh],true);
            // engrave plus symbol
              translate([w+l/2+l/(sy>0?5:10),sy*(d/4+1),wz]){
