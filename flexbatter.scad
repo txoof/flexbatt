@@ -17,7 +17,7 @@
    balanced-serial battery packs.
    
    The preconfigured battery sizes are:
-   AA, AAA, C, D, 18650(Li-Ion), 18650P(protected Li-Ion), CR123A(16340)
+   AA, AAA, C, D, 18650(Li-Ion), 18650P(protected Li-Ion), CR123A(16340), 21700(Li-Ion)
    
    Given that the printed plastic spring needs to be flexible, ABS is the material
    of choice here.
@@ -50,7 +50,7 @@
 */
 
 /* [Battery Type and Configuration] */
-cell = 1; //[0:AAA, 1:AA, 2:C, 3:D, 4:Li18650, 5:Li18650P, 6:CR123A, 7:Li26650]
+cell = 1; //[0:AAA, 1:AA, 2:C, 3:D, 4:Li18650, 5:Li18650P, 6:CR123A, 7:Li26650, 8:Li21700]
 ParallelCells = 3; //[1:10]
 SeriesCells = 1; //[1:3]
 AlternateSymbols = 1; //[0:False, 1:True]
@@ -201,8 +201,23 @@ Li26650 = [
   ["lenCorrect", 0],      // lcorr:   length correction for multi-cell compartments 
 ];
 
+/*
+module flexbatter21700(n=1,m=1,deepen=0,df=1,oh=0){
+   flexbatter(n=n,m=m,deepen=deepen,df=df,oh=oh,l=70.2,lcorr=0.3,d=21.5,hf=0.75,shd=3,eps=0.28);
+}  
+*/
+Li21700 = [
+  ["len", 70.2],          // l:       length of cell
+  ["dia", 21.5],          // d:       diameter of cell
+  ["cellHeight", 0.75],   // hf:      relative height of cell (1 = full diameter)
+  ["screwHole", 3],       // shd:     screw hole diamter
+  ["eps", 0.28],          // eps:     extra diameter space
+  ["lenCorrect", 0.3],    // lcorr:   length correction for multi-cell compartments 
+];
+
+
 // array for customizer
-batteryTypes = [AAA, AA, C, D, Li18650, Li18650P, CR123A, Li26650];
+batteryTypes = [AAA, AA, C, D, Li18650, Li18650P, CR123A, Li26650, Li21700 ];
 
 
 module battery(type = AA, n = 1, m = 1, alt = 1) {
