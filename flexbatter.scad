@@ -30,6 +30,13 @@
 
 
    Updated by Aaron Ciuffo 
+    25 May 2021
+      * added Li21700 cell provided by Mauro Vassovinio https://www.thingiverse.com/kabuk
+
+    5 April 2016
+      * updated engraving to alternate +/-; -/+; +/- in cells
+        - thanks to [infinigrove](http://www.thingiverse.com/infinigrove)
+        
     1 April 2016
    Changes:
      * removed depricated assign() statements
@@ -39,9 +46,6 @@
      * added customizer section
      * fixed missing cutouts inside parallel cells on Y face as per Heinz suggestion
 
-    5 April 2016
-      * updated engraving to alternate +/-; -/+; +/- in cells
-        - thanks to [infinigrove](http://www.thingiverse.com/infinigrove)
 
     Usage:
       * battery(type = <battery name>, n = <num parallel cells>, m = <num series cells>);
